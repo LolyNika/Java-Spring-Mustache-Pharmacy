@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Медицинские приборы</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+</head>
+<style>
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #000000;
+        color: white;
+        text-align: center;
+    }
+</style>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+<!--        <a class="navbar-brand"><img src="pixlr-bg-result.png" width="60" height="60" alt="Картинка"/></a>-->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/home" role="button">На главную страницу</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">0.0.2</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<center><h1>Список медицинских приборов</h1></center>
+<br/><br/>
+<center><a class="btn btn-primary" href="/medevices/add" role="button">Добавить новый медицинский прибор</a></center>
+<br/><br/>
+<div>
+    <center><table border="1" class="table w-50">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Название</th>
+<!--            <th scope="col">description</th>-->
+<!--            <th scope="col">manufacturer</th>-->
+<!--            <th scope="col">precautions</th>-->
+<!--            <th scope="col">packaging</th>-->
+<!--            <th scope="col">storageConditions</th>-->
+<!--            <th scope="col">expDate</th>-->
+<!--            <th scope="col">conditionsVacations</th>-->
+            <th scope="col">Изменение</th>
+            <th scope="col">Удаление</th>
+        </tr>
+        {{#medevicesList}}
+            <tr>
+                <td scope="row">{{medeviceID}}</td>
+                <td><a href="/medevices/{{medeviceID}}/info">{{#title}}{{title}}{{/title}}</a></td>
+<!--                <td>{{#description}}{{description}}{{/description}}</td>-->
+<!--                <td>{{#manufacturer}}{{manufacturer}}{{/manufacturer}}</td>-->
+<!--                <td>{{#precautions}}{{precautions}}{{/precautions}}</td>-->
+<!--                <td>{{#packaging}}{{packaging}}{{/packaging}}</td>-->
+<!--                <td>{{#storageconditions}}{{storageconditions}}{{/storageconditions}}</td>-->
+<!--                <td>{{#expdate}}{{expdate}}{{/expdate}}</td>-->
+<!--                <td>{{#conditionsvacations}}{{conditionsvacations}}{{/conditionsvacations}}</td>-->
+                <td><a href="/medevices/{{medeviceID}}/edit">Изменить</a></td>
+                <td><a href="/medevices/{{medeviceID}}/delete">Удалить</a></td>
+            </tr>
+        {{/medevicesList}}
+    </table></center>
+</div>
+<br/><br/>
+<div class="footer">
+    <p>&copy;LolyNIka 2022</p>
+</div>
+</body>
+</html>

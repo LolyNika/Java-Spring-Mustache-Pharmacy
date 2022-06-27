@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Список заказов на изготовление</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+</head>
+<style>
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #000000;
+        color: white;
+        text-align: center;
+    }
+</style>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+<!--        <a class="navbar-brand"><img src="pixlr-bg-result.png" width="60" height="60" alt="Картинка"/></a>-->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/home" role="button">На главную страницу</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">0.0.2</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<center><h1>Список заказов на изготовление</h1></center>
+<br/><br/>
+<center><a class="btn btn-primary" href="/fabrications/add" role="button">Оформить новую заявку на изготовление</a></center>
+<br/>
+<!--<div>-->
+<!--    <nobr>-->
+<!--        <a href="/fabrications/add">Оформить заявку на изготовление</a> |-->
+<!--        <a href="/">Back to Index</a>-->
+<!--    </nobr>-->
+<!--</div>-->
+<center><div>
+    <table border="1" class="table w-75">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Название</th>
+<!--            <th scope="col">Комментарий</th>-->
+            <th scope="col">Дата/время заказа</th>
+            <th scope="col">ФИО заказчика</th>
+<!--            <th scope="col">Контакты заказчика</th>-->
+            <th scope="col">Цена</th>
+            <th scope="col">Кол-во</th>
+<!--            <th scope="col">Изготавливаемый препарат</th>-->
+            <th scope="col">Статус заказа</th>
+            <th scope="col">Изменить статус на...</th>
+            <th scope="col"></th>
+            <th scope="col">Изменение</th>
+            <th scope="col">Удаление</th>
+        </tr>
+        {{#fabricationsList}}
+            <tr>
+                <td scope="row">{{#fabricationsID}}{{fabricationsID}}{{/fabricationsID}}</td>
+                <td><a href="/fabrications/{{fabricationsID}}/info">{{#title}}{{title}}{{/title}}</a></td>
+<!--                <td>{{#comment}}{{comment}}{{/comment}}</td>-->
+                <td>{{#orderdate}}{{orderdate}}{{/orderdate}}</td>
+                <td>{{#fullnamecustomer}}{{fullnamecustomer}}{{/fullnamecustomer}}</td>
+<!--                <td>{{#contactscustomer}}{{contactscustomer}}{{/contactscustomer}}</td>-->
+                <td>{{#price}}{{price}}{{/price}}</td>
+                <td>{{#amount}}{{amount}}{{/amount}}</td>
+<!--                {{#tabletfabric}}-->
+<!--                    <td> {{title}}</td>-->
+<!--                {{/tabletfabric}}-->
+                <td>{{#iscomplited}}{{iscomplited}}{{/iscomplited}}</td>
+                <form id="cart" action="/fabrications/activity" name="cart" method="POST">
+                <td><div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="activity" id="inlineRadio1" value="1">
+                    <label class="form-check-label" for="inlineRadio1">Активный</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="activity" id="inlineRadio2" value="2" checked>
+                    <label class="form-check-label" for="inlineRadio2">Неактивный</label>
+                </div></td>
+                    <input type="hidden" name="fabricationsID" value="{{fabricationsID}}">
+                    <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                    <td><input type="submit" class="btn btn-primary" value="Обновить статус"/></td>
+                </form>
+                <td><a href="/fabrications/{{fabricationsID}}/edit">Изменить</a></td>
+                <td><a href="/fabrications/{{fabricationsID}}/delete">Удалить</a></td>
+            </tr>
+        {{/fabricationsList}}
+    </table>
+</div></center>
+<br/><br/>
+<div class="footer">
+    <p>&copy;LolyNIka 2022</p>
+</div>
+</body>
+</html>

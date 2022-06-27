@@ -1,0 +1,283 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+
+    <title>{{#add}}
+        Добавить новый лекарственный препарат{{/add}}{{^add}}
+        Изменить информацию о лекарственном препарате{{/add}}</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+</head>
+<style>
+    .test_btn {
+        margin: 20px;
+    }
+
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #000000;
+        color: white;
+        text-align: center;
+    }
+
+    .cards {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        max-width: 300px;
+        margin: auto;
+        text-align: center;
+        font-family: arial;
+    }
+
+    .margin {
+        margin-left: 40px;
+    }
+
+    .text-block {
+        padding: 0px 0px 0px 20px;
+    }
+
+    .price {
+        color: grey;
+        font-size: 22px;
+    }
+
+    .card button {
+        border: none;
+        outline: 0;
+        padding: 12px;
+        color: white;
+        background-color: #000;
+        text-align: center;
+        cursor: pointer;
+        width: 100%;
+        font-size: 18px;
+    }
+
+    .card button:hover {
+        opacity: 0.7;
+    }
+
+    BODY {
+
+        background-image: url(THXXeBdeEfA.jpg);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+
+    }
+
+</style>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+<!--        <a class="navbar-brand"><img src="pixlr-bg-result.png" width="60" height="60" alt="Картинка"/></a>-->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/home" role="button">На главную страницу</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">0.0.2</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<center><h1>{{#add}}
+    Добавить новый лекарственный препарат{{/add}}{{^add}}Изменить информацию о лекарственном препарате{{/add}}</h1></center>
+<!--<a href="/employers">Вернуть</a>-->
+<br/>
+<center><a class="btn btn-primary" href="/tablets" role="button">Вернуться к списку лекарственных препаратов</a></center>
+<br/>
+<center>
+    <div class="text-block">
+        {{#tablet}}
+            <form action="{{#add}}/tablets/add{{/add}}{{^add}}/tablets/{{tabletID}}/edit{{/add}}" name="user"
+                  method="POST">
+
+                <br class="row g-3">
+                    {{#tabletID}}
+                        <div class="form-floating mb-3">
+                            <input type="hidden" value="{{tabletID}}" class="form-control" id="floatingInput"
+                                   placeholder="name@example.com">
+                            <label for="floatingInput"></label>
+                        </div>
+                    {{/tabletID}}
+
+                    {{#errors}}
+                        <center>
+                            <table id="myTable" border="1" class="table w-25">
+                                <tr>
+                                    <th scope="col">Ошибка (-и)</th>
+                                </tr>
+                                {{#errorsMaps}}
+                                    <tr>
+                                        <td>{{#defaultMessage}}{{defaultMessage}}{{/defaultMessage}}</td>
+                                    </tr>
+                                {{/errorsMaps}}
+                            </table>
+                        </center>
+                    {{/errors}}{{^errors}}{{/errors}}
+
+                    <div class="form-floating mb-3 w-25">
+                        <input type="text" name="title" value="{{#title}}{{title}}{{/title}}"
+                               class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput">Название</label>
+                    </div>
+
+                    <br/>
+                    <div class="form-floating mb-3 w-75">
+                        <!--                <textarea class="form-control" name="description"-->
+                        <!--                          id="floatingInput" aria-label="With textarea"-->
+                        <!--                          rows="3">{{#description}}{{description}}{{/description}}</textarea>-->
+                        <input type="text" name="description" value="{{#description}}{{description}}{{/description}}"
+                               class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput">Описание</label>
+                    </div>
+
+                    <div class="form-floating mb-3 w-75">
+                        <input type="text" name="pharmgroup" value="{{#pharmgroup}}{{pharmgroup}}{{/pharmgroup}}"
+                               class="form-control" id="floatingPassword" placeholder="name@example.com">
+                        <label for="floatingPassword">Фармокологическая группа</label>
+                    </div>
+
+                    <div class="form-floating mb-3 w-75">
+                        <input type="text" name="indications" value="{{#indications}}{{indications}}{{/indications}}"
+                               class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput">Показания</label>
+                    </div>
+
+                    <div class="form-floating mb-3 w-75">
+                        <input type="text" name="methodapplicanddose"
+                               value="{{#methodapplicanddose}}{{methodapplicanddose}}{{/methodapplicanddose}}"
+                               class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput">Способ применения и дозировки</label>
+                    </div>
+
+                    <div class="form-floating mb-3 w-75">
+                        <input type="text" name="sideeffects" value="{{#sideeffects}}{{sideeffects}}{{/sideeffects}}"
+                               class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput">Побочные эффекты</label>
+                    </div>
+
+                    <div class="form-floating mb-3 w-75">
+                        <input type="text" name="contraindications"
+                               value="{{#contraindications}}{{contraindications}}{{/contraindications}}"
+                               class="form-control"
+                               id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput">Противопоказания</label>
+                    </div>
+                    <div class="form-floating mb-3 w-75">
+                        <input type="text" name="interaction" value="{{#interaction}}{{interaction}}{{/interaction}}"
+                               class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput">Взаимодействие с другими препаратами</label>
+                    </div>
+                    <div class="form-floating mb-3 w-75">
+                        <input type="text" name="precautions" value="{{#precautions}}{{precautions}}{{/precautions}}"
+                               class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput">Меры предосторожности</label>
+                    </div>
+                    <div class="form-floating mb-3 w-75">
+                        <input type="text" name="overdose" value="{{#overdose}}{{overdose}}{{/overdose}}"
+                               class="form-control"
+                               id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput">Передозировка</label>
+                    </div>
+                    <div class="form-floating mb-3 w-75">
+                        <input type="text" name="packaging" value="{{#packaging}}{{packaging}}{{/packaging}}"
+                               class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput">Упаковка</label>
+                    </div>
+                    <div class="form-floating mb-3 w-75">
+                        <input type="text" name="storeconditions"
+                               value="{{#storeconditions}}{{storeconditions}}{{/storeconditions}}" class="form-control"
+                               id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput">Условия хранения</label>
+                    </div>
+                    <div class="form-floating mb-3 w-75">
+                        <input type="number" name="expdate" value="{{#expdate}}{{expdate}}{{/expdate}}"
+                               class="form-control"
+                               id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput">Срок годности (лет)</label>
+                    </div>
+                    <div class="form-floating mb-3 w-75">
+                        <input type="text" name="conditionsvacation"
+                               value="{{#conditionsvacation}}{{conditionsvacation}}{{/conditionsvacation}}"
+                               class="form-control"
+                               id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput">Условия отпуска</label>
+                    </div>
+                    <!--            <div class="form-floating mb-3">-->
+                    <!--                <input type="text" name="contraindications"-->
+                    <!--                       value="{{#contraindications}}{{contraindications}}{{/contraindications}}" class="form-control"-->
+                    <!--                       id="floatingInput" placeholder="name@example.com">-->
+                    <!--                <label for="floatingInput">Противопоказания</label>-->
+                    <!--            </div>-->
+                    <!--            <tr>-->
+                    <!--               <div>-->
+                    Выберите от чего будет препарат
+                    <!--               </div>-->
+                    <select required name="tablettoID" class="form-select mb-3 text-block w-75"
+                            aria-label="Default select example">
+                        {{#tabletto}}
+                            <option value="{{#tablettoid}}{{tablettoid}}{{/tablettoid}}"
+                                    selected>{{#title}}{{title}}{{/title}}</option>
+                        {{/tabletto}}
+                        {{#tablettoList}}
+                            <option value="{{#tablettoid}}{{tablettoid}}{{/tablettoid}}">{{#title}}{{title}}{{/title}}</option>
+                        {{/tablettoList}}
+                    </select>
+                    <!--            </tr>-->
+                    <!--            <tr>-->
+                    <!--                <div> -->
+                    Выбирите возможность изготовления препарата
+                    <!--                </div>-->
+                    <div class="form-check text-block">
+                        <input value="1" class="form-check-input" type="radio" name="section" id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Да
+                        </label>
+                    </div>
+                    <div class="form-check text-block">
+                        <input value="2" class="form-check-input" type="radio" name="section" id="flexRadioDefault2"
+                               checked>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Нет
+                        </label>
+                    </div>
+                    <!--                <select required name="section" class="form-select mb-3" aria-label="Default select example">-->
+                    <!--                    <option selected>Выбирете возможность изготовления</option>-->
+                    <!--                    <option value="1">Да</option>-->
+                    <!--                    <option value="2">Нет</option>-->
+                    <!--                </select>-->
+                    <!--            </tr>-->
+                    <div><input type="hidden" name="_csrf" value="{{_csrf.token}}"></div>
+                    <input type="submit" class="btn btn-primary"
+                           value="{{#add}}Создать{{/add}}{{^add}}Обновить{{/add}}"/>
+<!--                </br>-->
+            </form>
+        {{/tablet}}
+    </div>
+</center>
+<br/><br/>
+<div class="error">{{#errorMessage}}{{errorMessage}}{{/errorMessage}}</div>
+<div class="footer">
+    <p>&copy;LolyNIka 2022</p>
+</div>
+</body>
+</html>

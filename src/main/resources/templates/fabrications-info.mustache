@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Информация о заявке на изготовление</title>
+    <meta content="width=device-width" name="viewport">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+</head>
+<style>
+
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #000000;
+        color: white;
+        text-align: center;
+    }
+
+
+    .card button {
+        border: none;
+        outline: 0;
+        padding: 12px;
+        color: white;
+        background-color: #000;
+        text-align: center;
+        cursor: pointer;
+        width: 100%;
+        font-size: 18px;
+    }
+
+    .card button:hover {
+        opacity: 0.7;
+    }
+
+    .text-block {
+        padding: 0px 0px 0px 20px;
+    }
+</style>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+<!--        <a class="navbar-brand"><img src="pixlr-bg-result.png" width="60" height="60" alt="Картинка"/></a>-->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/home" role="button">На главную страницу</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">0.0.2</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br/><br/>
+{{#fabrications}}
+    <center><h1>Подробная информация о заявке № "{{fabricationsID}}"</h1></center>
+    <div class="text-block">
+        <h2>Название</h2>
+        <h3>{{#title}}{{title}}{{/title}}</h3>
+        <br/><br/>
+        <h2>Комментарий</h2>
+        <h3>{{#comment}}{{comment}}{{/comment}}</h3>
+        <br/><br/>
+        <h2>Дата и время оформления заявки</h2>
+        <h3>{{#orderdate}}{{orderdate}}{{/orderdate}}</h3>
+        <br/><br/>
+        <h2>ФИО заказчика</h2>
+        <h3>{{#fullnamecustomer}}{{fullnamecustomer}}{{/fullnamecustomer}}</h3>
+        <br/><br/>
+        <h2>Контакты заказчика</h2>
+        <h3>{{#contactscustomer}}{{contactscustomer}}{{/contactscustomer}}</h3>
+        <br/><br/>
+        <h2>Цена</h2>
+        <h3>{{#price}}{{price}}{{/price}}</h3>
+        <br/><br/>
+        <h2>Количество</h2>
+        <h3>{{#amount}}{{amount}}{{/amount}}</h3>
+        <br/><br/>
+        <h2>Изготавлеваемый препарат</h2>
+        <h3>{{#tabletfabric}}{{title}}{{/tabletfabric}}</h3>
+        <br/><br/>
+        <h2>Активен</h2>
+        <h3>{{#iscomplited}}{{iscomplited}}{{/iscomplited}}</h3>
+        <br/><br/>
+        <br/><br/>
+        <center><a class="btn btn-primary" href="/fabrications" role="button">Открыть список заявок на изготовление</a></center>
+{{/fabrications}}
+</div>
+<br/><br/>
+<div class="footer">
+    <p>&copy;LolyNIka 2022</p>
+</div>
+</body>
+</html>

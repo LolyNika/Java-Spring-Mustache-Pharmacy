@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Информация о лекарственном препарате</title>
+    <meta content="width=device-width" name="viewport">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+</head>
+<style>
+
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #000000;
+        color: white;
+        text-align: center;
+    }
+
+    .card button {
+        border: none;
+        outline: 0;
+        padding: 12px;
+        color: white;
+        background-color: #000;
+        text-align: center;
+        cursor: pointer;
+        width: 100%;
+        font-size: 18px;
+    }
+
+    .card button:hover {
+        opacity: 0.7;
+    }
+
+    .text-block {
+        padding: 0px 0px 0px 20px;
+    }
+</style>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+<!--        <a class="navbar-brand"><img src="pixlr-bg-result.png" width="60" height="60" alt="Картинка"/></a>-->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/home" role="button">На главную страницу</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">0.0.2</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br/><br/>
+{{#tablet}}
+    <center><h1>Подробная информация о лекарственном препарате "{{title}}"</h1></center>
+    <div class="text-block">
+        <h2>Описание</h2>
+        <h3>{{#description}}{{description}}{{/description}}</h3>
+        <br/><br/>
+        <h2>Фармакологическая группа</h2>
+        <h3>{{#pharmgroup}}{{pharmgroup}}{{/pharmgroup}}</h3>
+        <br/><br/>
+        <h2>Показания</h2>
+        <h3>{{#indications}}{{indications}}{{/indications}}</h3>
+        <br/><br/>
+        <h2>Способ применения и дозы</h2>
+        <h3>{{#methodapplicanddose}}{{methodapplicanddose}}{{/methodapplicanddose}}</h3>
+        <br/><br/>
+        <h2>Побочные эффекты</h2>
+        <h3>{{#sideeffects}}{{sideeffects}}{{/sideeffects}}</h3>
+        <br/><br/>
+        <h2>Противопоказания</h2>
+        <h3>{{#contraindications}}{{contraindications}}{{/contraindications}}</h3>
+        <br/><br/>
+        <h2>Меры предосторожности</h2>
+        <h3>{{#precautions}}{{precautions}}{{/precautions}}</h3>
+        <br/><br/>
+        <h2>Передозировка</h2>
+        <h3>{{#overdose}}{{overdose}}{{/overdose}}</h3>
+        <br/><br/>
+        <h2>Упаковка</h2>
+        <h3>{{#packaging}}{{packaging}}{{/packaging}}</h3>
+        <br/><br/>
+        <h2>Условия хранения</h2>
+        <h3>{{#storeconditions}}{{storeconditions}}{{/storeconditions}}</h3>
+        <br/><br/>
+        <h2>Срок годности</h2>
+        <h3>До {{#expdate}}{{expdate}}{{/expdate}} Года</h3>
+        <br/><br/>
+        <h2>Условия отпуска</h2>
+        <h3>{{#conditionsvacation}}{{conditionsvacation}}{{/conditionsvacation}}</h3>
+        <br/><br/>
+
+        <br/><br/>
+        <center><a class="btn btn-primary" href="/tablets" role="button">Открыть список лекарственных препаратов</a>
+        </center>
+        <!--    <table id="myTable" border="1" class="table w-25">-->
+        <!--        <tr>-->
+        <!--            <th scope="col">№</th>-->
+        <!--            <th scope="col">Название лекарственного препарата</th>-->
+        <!--            &lt;!&ndash;            <th scope="col">description</th>&ndash;&gt;-->
+        <!--            &lt;!&ndash;            <th scope="col">pharmGroup</th>&ndash;&gt;-->
+        <!--            &lt;!&ndash;            <th scope="col">indications</th>&ndash;&gt;-->
+        <!--            &lt;!&ndash;            <th scope="col">methodApplicAndDose</th>&ndash;&gt;-->
+        <!--            &lt;!&ndash;            <th scope="col">sideEffects</th>&ndash;&gt;-->
+        <!--            &lt;!&ndash;            <th scope="col">contraindications</th>&ndash;&gt;-->
+        <!--            &lt;!&ndash;            <th scope="col">interaction</th>&ndash;&gt;-->
+        <!--            &lt;!&ndash;            <th scope="col">precautions</th>&ndash;&gt;-->
+        <!--            &lt;!&ndash;            <th scope="col">overdose</th>&ndash;&gt;-->
+        <!--            &lt;!&ndash;            <th scope="col">packaging</th>&ndash;&gt;-->
+        <!--            &lt;!&ndash;            <th scope="col">storeConditions</th>&ndash;&gt;-->
+        <!--            &lt;!&ndash;            <th scope="col">expDate</th>&ndash;&gt;-->
+        <!--            &lt;!&ndash;            <th scope="col">conditionsvacation</th>&ndash;&gt;-->
+        <!--            &lt;!&ndash;            <th scope="col">IDtabletTO</th>&ndash;&gt;-->
+        <!--            &lt;!&ndash;            <th scope="col">Изготовление</th>&ndash;&gt;-->
+        <!--            &lt;!&ndash;            <th scope="col">Edit</th>&ndash;&gt;-->
+        <!--        </tr>-->
+
+        <!--        <tr>-->
+        <!--            <td scope="row">{{tabletID}}</td>-->
+        <!--            <td><a href="/tablet/{{tabletID}}/info">{{title}}</a></td>-->
+        <!--            &lt;!&ndash;                <td>{{#description}}{{description}}{{/description}}</td>&ndash;&gt;-->
+        <!--            &lt;!&ndash;                <td>{{#pharmgroup}}{{pharmgroup}}{{/pharmgroup}}</td>&ndash;&gt;-->
+        <!--            &lt;!&ndash;                <td>{{#indications}}{{indications}}{{/indications}}</td>&ndash;&gt;-->
+        <!--            &lt;!&ndash;                <td>{{#methodapplicanddose}}{{methodapplicanddose}}{{/methodapplicanddose}}</td>&ndash;&gt;-->
+        <!--            &lt;!&ndash;                <td>{{#sideeffects}}{{sideeffects}}{{/sideeffects}}</td>&ndash;&gt;-->
+        <!--            &lt;!&ndash;                <td>{{#contraindications}}{{contraindications}}{{/contraindications}}</td>&ndash;&gt;-->
+        <!--            &lt;!&ndash;                <td>{{#interaction}}{{interaction}}{{/interaction}}</td>&ndash;&gt;-->
+        <!--            &lt;!&ndash;                <td>{{#precautions}}{{precautions}}{{/precautions}}</td>&ndash;&gt;-->
+        <!--            &lt;!&ndash;                <td>{{#overdose}}{{overdose}}{{/overdose}}</td>&ndash;&gt;-->
+        <!--            &lt;!&ndash;                <td>{{#packaging}}{{packaging}}{{/packaging}}</td>&ndash;&gt;-->
+        <!--            &lt;!&ndash;                <td>{{#storeconditions}}{{storeconditions}}{{/storeconditions}}</td>&ndash;&gt;-->
+        <!--            &lt;!&ndash;                <td>{{#expdate}}{{expdate}}{{/expdate}} Года</td>&ndash;&gt;-->
+        <!--            &lt;!&ndash;                <td>{{#conditionsvacation}}{{conditionsvacation}}{{/conditionsvacation}}</td>&ndash;&gt;-->
+        <!--            &lt;!&ndash;                <td>{{#tabletTo}}{{title}}{{/tabletTo}}</td>&ndash;&gt;-->
+        <!--            &lt;!&ndash;                <td>{{#making}}{{making}}{{/making}}</td>&ndash;&gt;-->
+        <!--            &lt;!&ndash;                <td><a href="/employers/{{tabletID}}/edit">Edit</a></td>&ndash;&gt;-->
+        <!--        </tr>-->
+{{/tablet}}
+    <!--</table>-->
+    </center>
+</div>
+<div>
+    <nobr>
+        {{#hasPrev}}<a href="/tablets?page={{prev}}">Prev</a>&nbsp;&nbsp;&nbsp;{{/hasPrev}}
+        {{#hasNext}}<a href="/tablets?page={{next}}">Next</a>{{/hasNext}}
+    </nobr>
+</div>
+<br/><br/>
+<div class="footer">
+    <p>&copy;LolyNIka 2022</p>
+</div>
+</body>
+</html>

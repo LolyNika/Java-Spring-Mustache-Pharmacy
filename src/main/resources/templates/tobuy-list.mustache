@@ -1,0 +1,204 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Купить товары</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+</head>
+<style>
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #000000;
+        color: white;
+        text-align: center;
+    }
+</style>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+<!--        <a class="navbar-brand"><img src="pixlr-bg-result.png" width="60" height="60" alt="Картинка"/></a>-->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/home" role="button">На главную страницу</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">0.0.2</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<center><h1>Купить товары</h1></center>
+<br/><br/>
+<center><a class="btn btn-primary" href="/cart" role="button">Открыть корзину выбранных товаров</a></center>
+<br/>
+<center><p><input type="text" id="myInput" onkeyup="myFunction()" placeholder="Поиск..."></p></center>
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, a, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+
+        /**
+         * if you need make search only for one cologne - delete for (a) and "break;",
+         * and instead [a] -> [number cologne]
+         */
+        for (i = 0; i < tr.length; i++) {
+            // for (a = 0; a < 2; a++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                    // break;
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+            // }
+        }
+    }
+</script>
+
+{{#errors}}
+    <center>
+        <table id="myTable" border="1" class="table w-25">
+            <tr>
+                <th scope="col">Ошибка (-и)</th>
+            </tr>
+            {{#errorCart}}
+                <tr>
+                    <td>{{#emptyCart}}{{emptyCart}}{{/emptyCart}}</td>
+                </tr>
+            {{/errorCart}}{{^errorCart}}{{/errorCart}}
+            {{#errorsMaps}}
+                <tr>
+                    <td>{{#defaultMessage}}{{defaultMessage}}{{/defaultMessage}}</td>
+                </tr>
+            {{/errorsMaps}}{{^errorsMaps}}{{/errorsMaps}}
+            {{#createdError}}
+                <tr>
+                    <td>{{#alreadyCreated}}{{alreadyCreated}}{{/alreadyCreated}}</td>
+                </tr>
+            {{/createdError}}{{^createdError}}{{/createdError}}
+        </table>
+    </center>
+{{/errors}}{{^errors}}{{/errors}}
+
+<!--<div>-->
+<!--    <nobr>-->
+<!--        <a href="/warehouse/add">Добавить на склад</a> |-->
+<!--        <a href="/">Back to Index</a>-->
+<!--    </nobr>-->
+<!--</div>-->
+<br/>
+<center><div>
+    <table id="myTable" border="1" class="table w-75">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Название товара</th>
+            <th scope="col">Цена</th>
+            <th scope="col">Количество</th>
+            <th scope="col">Выберите количество</th>
+            <th scope="col"></th>
+            <th scope="col">Отправить</th>
+        </tr>
+
+        {{#wareHousesList}}
+            <form id="cart" action="/cart/add" name="cart" method="POST">
+                <tr>
+                    <td scope="row">{{#warehouseID}}{{warehouseID}}{{/warehouseID}}</td>
+                    {{#tabletwarehouse}}
+                        <td><a href="/tablets/{{tabletID}}/info">{{#title}}{{title}}{{/title}}</a></td>
+                    {{/tabletwarehouse}}
+                    {{#medevicewarehouse}}
+                        <td><a href="/medevices/{{medeviceID}}/info">{{#title}}{{title}}{{/title}}</a></td>
+                    {{/medevicewarehouse}}
+                    <td>{{#price}}{{price}}{{/price}}</td>
+                    <td>{{#stockavailability}}{{stockavailability}}{{/stockavailability}}</td>
+                    <td>
+                        <div class="form-floating mb-3">
+                            <input type="number" name="amount" value="" class="form-control"
+                                   id="floatingInput" placeholder="name@example.com">
+                            <label for="floatingInput">Количество...</label>
+                        </div>
+                    </td>
+                    <td><input type="hidden" value="{{warehouseID}}" name="warehouseID"/></td>
+                    <!--                    <td><div class="form-check">-->
+                    <!--&lt;!&ndash;                            <input type="hidden" name="amount" value="5" class="form-control"&ndash;&gt;-->
+                    <!--&lt;!&ndash;                                   id="cart" placeholder="name@example.com">&ndash;&gt;-->
+                    <!--&lt;!&ndash;                            <label for="cart">amount</label>&ndash;&gt;-->
+                    <!--                        <input class="form-check-input" name="amount" type="hidden" value="5" id="cart">-->
+                    <!--                        <input class="form-check-input" name="warehouseID" type="checkbox" value="{{warehouseID}}" id="cart">-->
+                    <!--                        <label class="form-check-label" for="cart">-->
+                    <!--                            Checked checkbox-->
+                    <!--                        </label>-->
+                    <!--                    </div></td>-->
+                    <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                    <td><input type="submit" class="btn btn-primary" value="Отправить в корзину"/></td>
+                    <!--                    <td><button type="button" class="btn btn-light" data-name="cart" onclick="new SubForm(event)">Отправить в корзину!</button></td>-->
+                </tr>
+            </form>
+        {{/wareHousesList}}
+        <!--        <input type="submit" class="btn btn-primary" value="Отправить в корзину"/>-->
+    </table>
+</div></center>
+<script>
+    // function SubForm (){
+    //     $.ajax({
+    //         url:'/cart/add',
+    //         type:'POST',
+    //         data:$('#cart').serialize(),
+    //         success:function(){
+    //             alert("worked");
+    //         }
+    //     });
+    // }
+
+    // function SubForm (){
+    //     $.ajax({
+    //         url:'/cart/add',
+    //         type:'POST',
+    //         data: { amount: $(this).amount.value,
+    //             warehouseID: $(this).warehouseID.value },
+    //         success:function(){
+    //             alert("worked");
+    //         }
+    //     });
+    //     return false;
+    // }
+
+    // function SubForm (){
+    //     $('#amount').submit(function(event) {
+    //         event.preventDefault();
+    //         $(this).submit();
+    //     });
+    // }
+
+    // $(function() {
+    //     $('#cart').submit(function(event) {
+    //         event.preventDefault();
+    //         $(this).submit();
+    //     });
+    // });
+</script>
+<br/><br/>
+<div class="footer">
+    <p>&copy;LolyNIka 2022</p>
+</div>
+</body>
+</html>

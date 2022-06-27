@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Главная страница</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+</head>
+<style>
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #000000;
+        color: white;
+        text-align: center;
+    }
+</style>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/home" role="button">На главную страницу</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">0.0.2</a>
+                </li>
+                <li class="nav-item">
+                    <form action="/auth/logout" method="post">
+                        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                        <input type="submit" class="btn btn-danger" value="Выход из аккаунта"/>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br/><br/>
+<div class="d-grid gap-2 col-6 mx-auto">
+    {{#admin_panel}}<a class="btn btn-primary" href="/employers" role="button">Список сотрудников</a>{{/admin_panel}}
+    {{^admin_panel}}{{/admin_panel}}
+    <a class="btn btn-primary" href="/tablets" type="button">Список медикаментов</a>
+    <a class="btn btn-primary" href="/medevices" type="button">Список медицинских приборов</a>
+    <a class="btn btn-primary" href="/fabrications" type="button">Список заказов на изготовление</a>
+    <a class="btn btn-primary" href="/buyings" type="button">Список заказов на закупку</a>
+    <a class="btn btn-primary" href="/warehouse" type="button">Список товаров медицинского назначения на складе</a>
+    <a class="btn btn-primary" href="/purchase" type="button">Список отпусков товаров</a>
+    <br/><br/>
+    <a class="btn btn-primary" href="/fabrications/add" type="button">Оформить заявку на изготовление медицинского препарата</a>
+    <a class="btn btn-primary" href="/buyings/add" type="button">Оформить заявку на закупку товаров медицинского назначения</a>
+    <a class="btn btn-primary" href="/warehouse/add" type="button">Добавить товар медицинского назначения на склад</a>
+    <a class="btn btn-primary" href="/cart/tobuy" type="button">Купить товары</a>
+</div>
+<br/><br/>
+<div class="footer">
+    <p>&copy;LolyNIka 2022</p>
+</div>
+</body>
+</html>

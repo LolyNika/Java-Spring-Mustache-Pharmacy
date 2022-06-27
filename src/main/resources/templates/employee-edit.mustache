@@ -1,0 +1,186 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>{{#add}}Добавить нового сотрудника{{/add}}{{^add}}Изменить информацию о сотруднике{{/add}}</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+</head>
+<style>
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #000000;
+        color: white;
+        text-align: center;
+    }
+
+    .text-block {
+        padding: 0px 0px 0px 20px;
+    }
+
+    BODY {
+
+        background-image: url(THXXeBdeEfA.jpg);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+
+    }
+
+</style>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+<!--        <a class="navbar-brand"><img src="pixlr-bg-result.png" width="60" height="60" alt="Картинка"/></a>-->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/home" role="button">На главную страницу</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">0.0.2</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<center><h1>{{#add}}Добавить нового сотрудника{{/add}}{{^add}}Изменить информацию о сотруднике{{/add}}</h1></center>
+<br/>
+<center><a class="btn btn-primary" href="/employers" role="button">Вернуться к списку сотрудников</a></center>
+<br/>
+<center>
+    <div class="text-block">
+        {{#employee}}
+            <form action="{{#add}}/employee/add{{/add}}{{^add}}/employee/{{employeeID}}/edit{{/add}}" name="user"
+                  method="POST">
+                <!--        <table border="0">-->
+                <br class="row g-3">
+                {{#employeeID}}
+                    <div class="form-floating mb-3">
+                        <input type="hidden" value="{{employeeID}}" class="form-control" id="floatingInput"
+                               placeholder="name@example.com">
+                        <label for="floatingInput"></label>
+                    </div>
+                {{/employeeID}}
+
+                {{#errors}}
+                    <center>
+                        <table id="myTable" border="1" class="table w-25">
+                            <tr>
+                                <th scope="col">Ошибка (-и)</th>
+                            </tr>
+                            {{#errorsMaps}}
+                                <tr>
+                                    <td>{{#defaultMessage}}{{defaultMessage}}{{/defaultMessage}}</td>
+                                </tr>
+                            {{/errorsMaps}}
+                            {{#nullSectionError}}
+                                <tr>
+                                    <td>{{#nullSection}}{{nullSection}}{{/nullSection}}</td>
+                                </tr>
+                            {{/nullSectionError}}{{^nullSectionError}}{{/nullSectionError}}
+                            {{#errorPass}}
+                                <tr>
+                                    <td>{{#wrongPass}}{{wrongPass}}{{/wrongPass}}</td>
+                                </tr>
+                            {{/errorPass}}{{^errorPass}}{{/errorPass}}
+                        </table>
+                    </center>
+                {{/errors}}{{^errors}}{{/errors}}
+
+                {{#newlogin}}
+                    <div class="form-floating mb-3 w-75">
+                        <input type="text" name="username" value="{{#defaultLogin}}{{defaultLogin}}{{/defaultLogin}}"
+                               class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput">Логин (стандартное LocalHost)</label>
+                    </div>
+                {{/newlogin}}{{^newlogin}}
+                <div class="form-floating mb-3 w-75">
+                    <input type="text" name="username" value="{{username}}"
+                           class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Логин</label>
+                </div>
+            {{/newlogin}}
+
+                {{#passOld}}
+                <div class="form-floating mb-3 w-75">
+                    <input type="text" name="password" value="{{#passworOld}}{{passworOld}}{{/passworOld}}"
+                           class="form-control" id="floatingInput" placeholder="Password">
+                    <label for="floatingInput">Пароль (старый)</label>
+                </div>
+        {{/passOld}}{{^passOld}}{{/passOld}}
+
+                <div class="form-floating mb-3 w-75">
+                    <input type="text" name="{{#passOld}}passwordNew{{/passOld}}{{^passOld}}password{{/passOld}}" value="{{#passwordNew}}{{passwordNew}}{{/passwordNew}}"
+                           class="form-control" id="floatingInput" placeholder="Password">
+                    <label for="floatingInput">Пароль (новый)</label>
+                </div>
+
+                <div class="form-floating mb-3 w-75">
+                    <input type="text" name="name" value="{{#name}}{{name}}{{/name}}" class="form-control"
+                           id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Имя</label>
+                </div>
+
+                <div class="form-floating mb-3 w-75">
+                    <input type="text" name="surname" value="{{#surname}}{{surname}}{{/surname}}" class="form-control"
+                           id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Фамилия</label>
+                </div>
+
+                <div class="form-floating mb-3 w-75">
+                    <input type="text" name="patronymic" value="{{#patronymic}}{{patronymic}}{{/patronymic}}"
+                           class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Отчество</label>
+                </div>
+
+                <div class="form-floating mb-3 w-75">
+                    <input type="text" name="position" value="{{#position}}{{position}}{{/position}}"
+                           class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Должность</label>
+                </div>
+                {{#newroleid}}
+                    <tr>
+                        <select required name="section" class="form-select mb-3 w-75"
+                                aria-label="Default select example">
+                            <option value="0" selected>Выбирете роль</option>
+                            <option value="1">Администратор</option>
+                            <option value="2">Сотрудник</option>
+                        </select>
+                    </tr>
+                {{/newroleid}}
+                {{^newroleid}}
+                    {{#role}}
+                        <td><input type="hidden" value="{{roleID}}" name="roleID"/></td>
+                    {{/role}}
+                {{/newroleid}}
+                <!--        </table>-->
+                <div><input type="hidden" name="_csrf" value="{{_csrf.token}}"></div>
+                <input type="submit" class="btn btn-primary" value="{{#add}}Создать{{/add}}{{^add}}Обновить{{/add}}"/>
+                <!--        </br>-->
+            </form>
+        {{/employee}}
+    </div>
+</center>
+<br/>
+<br/><br/>
+<div class="error">{{#errorMessage}}{{errorMessage}}{{/errorMessage}}</div>
+<div class="footer">
+    <p>&copy;LolyNIka 2022</p>
+</div>
+</body>
+</html>
